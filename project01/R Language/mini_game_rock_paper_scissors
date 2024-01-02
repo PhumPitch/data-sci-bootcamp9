@@ -1,0 +1,45 @@
+game <- function(){
+    playerScore = 0
+    comScore = 0
+
+    username <- readline("What is your name? : ")
+    print("")
+    print(paste("Hello ! ,", username))
+    print("Welcome to the game! ...Ready for it?")
+    print("You can simply type a number to choose Rock, Paper, Scissors //GLHF :) ")
+
+    badExpressions <- c("Unlucky,","*OOPS*","ehe,","NICE TRY mate, *But")
+    goodExpressions <- c("Nice one","Yeah,","Heyy,")
+
+    while(TRUE){
+    print("")
+    flush.console()
+    userChs = as.numeric(readline("[1]Rock [2]Paper [3]Scissors or [0]Finished : "))
+    shape <- c(1,2,3)
+    comChs = sample(shape,1)
+    randomBE = sample(badExpressions,1)
+    randomGE = sample(goodExpressions,1)
+
+   if (userChs == 0) {
+        break
+    }else if ((userChs == 1 & comChs == 2 ) | (userChs == 2 & comChs == 3 )|(userChs == 3 & comChs == 1 )){
+        print(paste(randomBE,"you just dropped your point"))
+        comScore = comScore + 1
+    }else if ((userChs == 1 & comChs == 3 )|(userChs == 2 & comChs == 1 )|(userChs == 3 & comChs == 2 )){
+        print(paste(randomGE,"you get 1 point"))
+        playerScore = playerScore + 1
+    }else if(userChs == comChs){
+        print("DRAW, Choose your next move")
+    }else{
+        print("You can only choose [1]Rock [2]Paper [3]Scissors or [0]Finished :")
+        print("Try Again")
+    }
+    }
+    print("GG, Thx for the game")
+    print(paste("Computer", comScore, "VS", "You", playerScore))
+
+    result <- (ifelse(playerScore > comScore, "YOU WIN!",ifelse(playerScore < comScore, "YOU LOSE", "DRAW")))
+    print(paste("Result is", result))
+}
+
+game()
